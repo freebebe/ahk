@@ -1,0 +1,111 @@
+;-----------------------------------------------光标移动
+CapsLock & k:: Send {Up}
+CapsLock & j:: Send {Down}
+CapsLock & h:: Send {Left}
+CapsLock & l:: Send {Right}
+return
+
+CapsLock & 0:: SEND {HOME}
+CapsLock & 4:: SEND {END}	
+return
+
+capslock & w:: send ^{Right}
+capslock & b:: send ^{Left}
+return
+;===============================================
+
+;-----------------------------------------------撤销-删减-复制/粘贴
+capslock & u::send ^{z}
+return
+
+capslock & .::
+send ^{y} ;FX
+return
+
+CapsLock & x:: Send {Backspace}
+CapsLock & d:: Send {Delete}
+return
+
+<!y::send ^{c}
+<!p::send ^{v}
+<!d::send ^{x}
+
+return
+;===============================================
+
+;-----------------------------------------------括选
+<+h::send {ShiftDown}{Left}
+<+j::send {ShiftDown}{Down}
+<+k::send {ShiftDown}{up}
+<+l::send {ShiftDown}{Right}
+return
+
+<+w::send {CtrlDown}{ShiftDown}{Right}{CtrlUp}{ShiftDown}
+return
+
+<+b::send {CtrlDown}{ShiftDown}{Left}{CtrlUp}{ShiftDown}
+return
+
+<+<!4::send +{End}
+<+<!0::send +{Home}
+return
+;===============================================
+
+;-----------------------------------------------段节
+>!d::send {END}{ShiftDown}{HOME}{ShiftUp}{Backspace}
+return
+
+>!y::
+send {HOME}{ShiftDown}{End}{ShiftUp}
+send ^c
+send {end}
+return
+
+>!x::
+send {HOME}{ShiftDown}{End}{ShiftUp}   
+send ^x
+send {end}
+return
+
+>!4::send +{end}{delete}
+return
+
+>!0::send +{home}{delete}
+return
+
+<!g::send {CtrlDown}{home}{CtrlUp}
+<!<+g::send {CtrlDown}{end}{CtrlUp}
+return
+;===============================================
+
+;-----------------------------------------------间距
+<^Backspace::send {home}{Left}{Enter}
+return
+;===============================================
+
+;-----------------------------------------------快捷语式
+>^-::
+Clipboard = -----------------------------------------------
+send ^v
+return
+
+>^=::
+Clipboard = ===============================================
+send ^v
+return
+
+>^.::
+Clipboard = .com
+send ^v
+return
+
+>^h::
+Clipboard = https://www.
+send ^v
+return
+;===============================================
+
+;-----------------------------------------------
+
+   
+  
