@@ -12,14 +12,13 @@ return
 capslock & w:: send ^{Right}
 capslock & b:: send ^{Left}
 return
-;===============================================
+;=============================================================================
 
 ;-----------------------------------------------撤销-删减-复制/粘贴
 capslock & u::send ^{z}
 return
 
-capslock & .::
-send ^{y} ;FX
+capslock & .::send ^{y}          ;FX
 return
 
 CapsLock & x:: Send {Backspace}
@@ -27,11 +26,19 @@ CapsLock & d:: Send {Delete}
 return
 
 <!y::send ^{c}
+return
+
+<!<+y::                         ;cos_copy
+send ^{Left}{ShiftDown}
+     ^{Right}{ShiftDown}
+send ^{c}
+return
+
 <!p::send ^{v}
 <!d::send ^{x}
 
 return
-;===============================================
+;=============================================================================
 
 ;-----------------------------------------------括选
 <+h::send {ShiftDown}{Left}
@@ -49,19 +56,26 @@ return
 <+<!4::send +{End}
 <+<!0::send +{Home}
 return
-;===============================================
+
+;=============================================================================
 
 ;-----------------------------------------------段节
->!d::send {END}{ShiftDown}{HOME}{ShiftUp}{Backspace}
+>!d::send {END}{ShiftDown}{HOME}{ShiftUp}{Backspace}    ;Q_here
 return
 
->!y::
+>!j::send {home}{Left}{ShiftDown}{home}{ShiftUp}{BackSpace}     ;Q_up
+Return
+ 
+>!k::send {end}{Right}{ShiftDown}{end}{ShiftUp}{BackSpace}  ;Q_down
+Return
+
+>!y::       ;c-c_here
 send {HOME}{ShiftDown}{End}{ShiftUp}
 send ^c
 send {end}
 return
 
->!x::
+>!x::           ;c-x_here
 send {HOME}{ShiftDown}{End}{ShiftUp}   
 send ^x
 send {end}
@@ -76,12 +90,12 @@ return
 <!g::send {CtrlDown}{home}{CtrlUp}
 <!<+g::send {CtrlDown}{end}{CtrlUp}
 return
-;===============================================
+;=============================================================================
 
 ;-----------------------------------------------间距
 <^Backspace::send {home}{Left}{Enter}
 return
-;===============================================
+;=============================================================================
 
 ;-----------------------------------------------快捷语式
 >^-::
@@ -90,7 +104,7 @@ send ^v
 return
 
 >^=::
-Clipboard = ===============================================
+Clipboard = =============================================================================
 send ^v
 return
 
@@ -103,9 +117,8 @@ return
 Clipboard = https://www.
 send ^v
 return
-;===============================================
+;=============================================================================
 
 ;-----------------------------------------------
-
-   
-  
+;连击
+;鼠标热键组合-移动-热键替代再次单击
