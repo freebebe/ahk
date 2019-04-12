@@ -1,0 +1,266 @@
+;///-----------------------------------------------光标移动
+CapsLock & k:: Send {Up}
+CapsLock & j:: Send {Down}
+CapsLock & h:: Send {Left}
+CapsLock & l:: Send {Right}
+return
+
+capslock & w:: send ^{Right}
+capslock & b:: send ^{Left}
+return
+
+capslock & p:: send ^{v}
+return
+;=============================================================================
+;-----------------------------------------------撤销-重复
+capslock & u::send ^{z}
+return
+
+capslock & .::send ^{y}          ;FX
+return
+;=============================================================================
+
+;///-----------------------------------------------括选
+
+>+h::send {ShiftDown}{Left}
+>+j::send {ShiftDown}{Down}
+>+k::send {ShiftDown}{up}
+>+l::send {ShiftDown}{Right}
+return
+
+>+w::send {CtrlDown}{ShiftDown}{Right}{CtrlUp}{ShiftDown}{ShiftUp}
+return
+
+>+b::send {CtrlDown}{ShiftDown}{Left}{CtrlUp}{ShiftDown}{ShiftUp}
+return
+
+>+4::send +{End}
+>+0::send +{Home}
+return
+
+<!<+y::                         ;cos_copy
+send ^{Left}{ShiftDown}
+     ^{Right}{ShiftDown}{ShiftUp}
+send ^{c}
+return
+
+;=============================================================================
+
+;-----------------------------------------------段节
+
+>!j::
+    send {home}{Left}{ShiftDown}{home}{ShiftUp}{BackSpace}     ;Q_up
+Return
+ 
+>!k::
+    send {end}{Right}{ShiftDown}{end}{ShiftUp}{BackSpace}  ;Q_down
+Return
+
+>!4::send +{end}{delete}
+return
+
+>!0::send +{home}{delete}
+return
+
+capslock & g::
+if capslockg_presses > 0
+{
+    capslockg_presses += 1
+    return
+}
+
+capslockg_presses = 1
+SetTimer, keycapslockg, 134
+return
+
+Keycapslockg:
+
+SetTimer, Keycapslockg, off
+
+if capslockg_presses = 1
+{
+    Send, {CtrlDown}{home}{ctrlup}
+}
+else if capslockg_presses = 2
+{
+    Send, {CtrlDown}{home}{CtrlDown}
+}
+else if capslockg_presses > 2
+{
+    MsgBox
+}
+;
+capslockg_presses = 0
+Return
+
+;-----------------------------------------------删除、复制与剪切连击组合
+
+capslock & y::                ;copy&cpy-here
+if capslocky_presses > 0
+
+{
+    capslocky_presses += 1
+    Return
+}
+
+capslocky_presses = 1
+SetTimer, Keycapslocky, 134
+Return
+
+Keycapslocky:
+
+SetTimer, Keycapslocky, off
+
+if capslocky_presses = 1
+{
+    Send, ^c
+}
+else if capslocky_presses = 2
+{
+    Send, {Home}{ShiftDown}{End}{ShiftUp}
+    send, ^c
+    send, {End}
+}
+else if capslocky_presses > 2
+{
+    MsgBox
+}
+;
+capslocky_presses = 0
+Return
+
+capslock & d::                  ;del&del-here
+if capslockd_presses > 0
+{
+    capslockd_presses += 1
+    Return
+}
+
+capslockd_presses = 1
+SetTimer, Keycapslockd, 134
+Return
+
+Keycapslockd:
+
+SetTimer, Keycapslockd, off
+
+if capslockd_presses = 1
+{
+    send, {Delete}
+}
+else if capslockd_presses = 2
+{
+    send, {END}{ShiftDown}{HOME}{ShiftUp}{Backspace}
+}
+else if capslockd_presses > 2
+
+{
+    MsgBox
+}
+
+;
+capslockd_presses = 0
+Return
+
+;
+capslock & x::                    ;bk0.1
+if capslockx_presses > 0
+{
+    capslockx_presses += 1
+    Return
+}
+
+capslockx_presses = 1
+SetTimer, Keycapslockx, 134
+Return
+
+Keycapslockx:
+
+SetTimer, Keycapslockx, off
+
+if capslockx_presses = 1
+{
+    send, {Backspace}
+}
+else if capslockx_presses = 2
+{
+    send,{HOME}{ShiftDown}{End}{ShiftUp}
+    send,^x
+    send,{End}
+}
+else if capslockx_presses > 2
+{
+    MsgBox
+}
+;reset code
+capslockx_presses = 0
+Return
+
+;=============================================================================
+
+;-----------------------------------------------end
+CapsLock & 4::          ;end
+if capslock4_presses > 4
+{
+    capslock4_presses += 1
+    Return
+}
+
+capslock4_presses = 1
+SetTimer, Keycapslock4, 150
+Return
+
+Keycapslock4:
+
+SetTimer, Keycapslock4, off
+
+if capslock4_presses = 1
+{
+    send, {END}
+}
+else if capslock4_presses = 2
+{
+    send, {ShiftDown}{END}
+    send, ^x
+}
+else if capslock4_presses > 2
+{
+    MsgBox
+}
+;
+capslock4_presses = 4
+Return
+
+CapsLock & 0::                  ;home
+if capslock0_presses > 0
+{
+    capslock0_presses += 1
+    Return
+}
+
+capslock0_presses = 1
+SetTimer, Keycapslock0, 150
+Return
+
+Keycapslock0:
+
+SetTimer, Keycapslock0, off
+
+if capslock0_presses = 1
+{
+    send, {home}
+}
+else if capslock0_presses = 2
+{
+    send, {ShiftDown}{home}
+    send, ^x
+}
+else if capslock0_presses > 2
+{
+    MsgBox
+}
+;
+capslock0_presses = 0
+Return
+
+;=============================================================================
