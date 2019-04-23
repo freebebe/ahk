@@ -197,7 +197,7 @@ if capslockg_presses > 0
     return
 }
 capslockg_presses = 1
-SetTimer, keycapslockg, 200
+SetTimer, keycapslockg, 150
 return
 
 Keycapslockg:
@@ -228,7 +228,7 @@ if capslocky_presses > 0
     Return
 }
 capslocky_presses = 1
-SetTimer, Keycapslocky, 200
+SetTimer, Keycapslocky, 150
 Return
 
 Keycapslocky:
@@ -278,7 +278,7 @@ if capslockd_presses > 0
     Return
 }
 capslockd_presses = 1
-SetTimer, Keycapslockd, 200
+SetTimer, Keycapslockd, 150
 Return
 
 Keycapslockd:
@@ -307,7 +307,7 @@ if capslockx_presses > 0
     Return
 }
 capslockx_presses = 1
-SetTimer, Keycapslockx, 200
+SetTimer, Keycapslockx, 150
 Return
 
 Keycapslockx:
@@ -341,7 +341,7 @@ if capslock4_presses > 0
     Return
 }
 capslock4_presses = 1
-SetTimer, Keycapslock4, 200
+SetTimer, Keycapslock4, 150
 Return
 
 Keycapslock4:
@@ -371,7 +371,7 @@ if capslock0_presses > 0
     Return
 }
 capslock0_presses = 1
-SetTimer, Keycapslock0, 200
+SetTimer, Keycapslock0, 150
 Return
 
 Keycapslock0:
@@ -396,33 +396,26 @@ Return
 
 ;=============================================================================
 
-;-------------------------------------------------窗口置顶
+;-------------------------------------------------窗口置顶、窗口转换
 >^\::  Winset, Alwaysontop, , A
+return
+
+RControl & Left:: send !{Tab}
+RControl & Right:: send !+{tab}
+return
 ;=============================================================================
 
 ;-------------------------------------------------快捷符号
-capslock & ,::
-Clipboard = 《》
-send ^v
-send {Left}
+capslock & ,:: send +{,}{.}
 return
 
-capslock & [::
-Clipboard = 【】
-send ^v
-send {Left}
+capslock & [:: send +{[}{]}
 return
 
-capslock & 9::
-Clipboard = （）
-send ^v
-send {Left}
+capslock & 9:: Send +{(}{)}
 return
 
-capslock & '::
-Clipboard = “”
-send ^v
-send {Left}
+capslock & ':: send +{"}{"}
 return
 
 >^.::
@@ -436,3 +429,5 @@ send ^v
 return
 ;============================================================================
 
+;-number code set ---software
+;==
