@@ -152,31 +152,31 @@ return
 ;///-----------------------------------------------括选
 
 
->+h:: send +{Left}
->+j:: send +{Down}
->+k:: send +{Up}
->+l:: send +{Right}
+>!h:: send +{Left}
+>!j:: send +{Down}
+>!k:: send +{Up}
+>!l:: send +{Right}
 return
 
->+w:: send {CtrlDown}{ShiftDown}{Right}{CtrlUp}{ShiftUp}
+>!w:: send {CtrlDown}{ShiftDown}{Right}{CtrlUp}{ShiftUp}
 return
 
->+b:: send {CtrlDown}{ShiftDown}{Left}{CtrlUp}{ShiftUp}
+>!b:: send {CtrlDown}{ShiftDown}{Left}{CtrlUp}{ShiftUp}
 return
 
->+4:: send +{End}
->+0:: send +{Home}
+>!4:: send +{End}
+>!0:: send +{Home}
 return
 
 ;=============================================================================
 
 ;-----------------------------------------------段节
 
->!j::
+>+j::
     send {home}{Left}{ShiftDown}{home}{ShiftUp}{BackSpace}     ;Q_up
 Return
  
->!k::
+>+k::
     send {end}{Right}{ShiftDown}{end}{ShiftUp}{BackSpace}  ;Q_down
 Return
 
@@ -184,10 +184,10 @@ Return
     send {home}{Left}{Enter}
 return
 
->!4:: send +{end}{delete}
+>+4:: send +{end}{delete}
 return
 
->!0:: send +{home}{delete}
+>+0:: send +{home}{delete}
 return
 
 capslock & g::
@@ -197,7 +197,7 @@ if capslockg_presses > 0
     return
 }
 capslockg_presses = 1
-SetTimer, keycapslockg, 200
+SetTimer, keycapslockg, 150
 return
 
 Keycapslockg:
@@ -228,7 +228,7 @@ if capslocky_presses > 0
     Return
 }
 capslocky_presses = 1
-SetTimer, Keycapslocky, 200
+SetTimer, Keycapslocky, 150
 Return
 
 Keycapslocky:
@@ -251,17 +251,17 @@ else if capslocky_presses > 2
 capslocky_presses = 0
 Return
 
-Y1:
+Y1:             ;单一字节
 send, ^c
 Return
 
-Y2:
+Y2:             ;段落
 Send, {Home}{ShiftDown}{End}{ShiftUp}
 send, ^c
 send, {End}
 Return
 
-Y3:
+Y3:             ;词组
 send, ^{Left}{ShiftDown}
       ^{Right}{ShiftDown}{ShiftUp}
 send, ^{c}
@@ -278,7 +278,7 @@ if capslockd_presses > 0
     Return
 }
 capslockd_presses = 1
-SetTimer, Keycapslockd, 200
+SetTimer, Keycapslockd, 150
 Return
 
 Keycapslockd:
@@ -307,7 +307,7 @@ if capslockx_presses > 0
     Return
 }
 capslockx_presses = 1
-SetTimer, Keycapslockx, 200
+SetTimer, Keycapslockx, 150
 Return
 
 Keycapslockx:
@@ -341,7 +341,7 @@ if capslock4_presses > 0
     Return
 }
 capslock4_presses = 1
-SetTimer, Keycapslock4, 200
+SetTimer, Keycapslock4, 150
 Return
 
 Keycapslock4:
@@ -371,7 +371,7 @@ if capslock0_presses > 0
     Return
 }
 capslock0_presses = 1
-SetTimer, Keycapslock0, 200
+SetTimer, Keycapslock0, 150
 Return
 
 Keycapslock0:
@@ -396,43 +396,48 @@ Return
 
 ;=============================================================================
 
-;-------------------------------------------------窗口置顶
+;-------------------------------------------------窗口置顶、窗口转换
 >^\::  Winset, Alwaysontop, , A
+return
+
+RControl & Left:: send !{Tab}
+RControl & Right:: send !+{tab}
+return
+
+>^PgDn:: send #{m}
 ;=============================================================================
 
-;-------------------------------------------------快捷符号
+;-------------------------------------------------快捷符号：批划
 capslock & ,::
-Clipboard = 《》
-send ^v
-send {Left}
+ send +{,}{.}
+ send {Left}
 return
 
 capslock & [::
-Clipboard = 【】
-send ^v
-send {Left}
+ send +{[}{]}
+ send {Left}
 return
 
-capslock & 9::
-Clipboard = （）
-send ^v
-send {Left}
+capslock & 9:: 
+ Send +{(}{)}
+ send {Left}
 return
 
 capslock & '::
-Clipboard = “”
-send ^v
-send {Left}
+ send +{"}{"}
+ send {Left}
 return
 
->^.::
+;;::
 Clipboard = .com
 send ^v
-return
+;;eturn
 
->^h::
+;;;capslock & /::
 Clipboard = https://www.
 send ^v
-return
+;;return
 ;============================================================================
 
+;-number code set ---software
+;==
